@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Data Dump</title>
+</head>
+<body>
+<ol> <!-- ordered lists render as 1, 2, 3, etc.. -->
+  <li>
+  <br>
+    <button type="button" onclick="getData1()">Get Editors</button>
+ <br>
+    <div id="data1">
+    </div>
+ <br>
+ </li>
+  <li>
+  <br>
+    <button type="button" onclick="getData2()">Get Authors</button>
+ <br>
+    <div id="data2">
+    </div>
+ <br>  
+  </li>
+  <li>
+  <br>
+    <button type="button" onclick="getData3()">Get Stories</button>
+ <br>
+    <div id="data3">
+    </div>
+ <br>  
+  </li>
+  
+   <li>
+  <br>
+    <button type="button" onclick="getData4()">Get Approval Processes</button>
+ <br>
+    <div id="data4">
+    </div>
+ <br>  
+  </li>
+  
+   <li>
+  <br>
+    <button type="button" onclick="getData5()">Get Story Queues</button>
+ <br>
+    <div id="data5">
+    </div>
+ <br>  
+  </li>
+  
+   <li>
+  <br>
+    <button type="button" onclick="getData6()">Get Committees</button>
+ <br>
+    <div id="data6">
+    </div>
+ <br>  
+  </li>
+</ol>
+
+</body>
+<script>
+//create div dynamically as parent node for the table
+let dataSection1=document.getElementById('data1');
+function getData1() {
+    let url = 'http://localhost:8080/project1.2/alleds';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = receiveData;
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    function receiveData() {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status == 200) {
+                let res = xhttp.responseText;
+                res = JSON.parse(res);
+                // Create table
+                let edTable = document.createElement('table');
+                edTable.id = 'EditorTable';
+                // Create header
+                let tHead = document.createElement('tr');
+                edTable.appendChild(tHead);
+                let headers = ['editor_Id','username', 'first_name', 'last_name',
+                	'email','rank','passwd'];
+
+                for (let h of headers) {
+                    let th = document.createElement('th');
+                    th.innerHTML = h;
+                    tHead.appendChild(th);
+                }
+                // Iterate through cats
+                for (let ed in res) {
+                    let tr = document.createElement('tr');
+                    edTable.appendChild(tr);
+                    let tdEditor_id = document.createElement('td');
+                    tdEditor_id.innerHTML = res[ed].editor_id;
+                    tr.appendChild(tdEditor_id);
+                    let tdUname=document.createElement('td');
+                    tdUname.innerHTML=res[ed].username;
+                    tr.appendChild(tdUname);
+                    let tdFirstN = document.createElement('td');
+                    tdFirstN.innerHTML = res[ed].first_name;
+                    tr.appendChild(tdFirstN);
+                    let tdLastN = document.createElement('td');
+                    tdLastN.innerHTML = res[ed].last_name;
+                    tr.appendChild(tdLastN);
+                    let tdEmail = document.createElement('td');
+                    tdEmail.innerHTML = res[ed].email;
+                    tr.appendChild(tdEmail);
+                    let tdRank = document.createElement('td');
+                    tdRank.innerHTML = res[ed].rank;
+                    tr.appendChild(tdRank);
+                    let tdPass = document.createElement('td');
+                    tdPass.innerHTML = res[ed].passwd;
+                    tr.appendChild(tdPass);
+                   
+
+                }
+
+                dataSection1.appendChild(edTable);
+                // for (let cat of res) {
+                    
+                // }
+            }
+        }
+    }
+}
+let dataSection2=document.getElementById('data2');
+function getData2() {
+    let url = 'http://localhost:8080/project1.2/allauths';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = receiveData;
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    function receiveData() {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status == 200) {
+                let res = xhttp.responseText;
+     
+                res = JSON.parse(res);
+        
+                // Create table
+                let authTable = document.createElement('table');
+                authTable.id = 'AuthorTable';
+                // Create header
+                let tHead = document.createElement('tr');
+                authTable.appendChild(tHead);
+                let headers = ['author_id', 'available points','username','firstName', 
+                	'lastName','author_age','email','passwd'];
+
+                for (let h of headers) {
+                    let th = document.createElement('th');
+                    th.innerHTML = h;
+                    tHead.appendChild(th);
+                }
+                // Iterate through authors
+                for (let auth in res) {
+                    let tr = document.createElement('tr');
+                    authTable.appendChild(tr);
+                    let tdAuthor_id = document.createElement('td');
+                    tdAuthor_id.innerHTML = res[auth].author_id;
+                    tr.appendChild(tdAuthor_id);
+                    let tdPoints=document.createElement('td');
+                    tdPoints.innerHTML=res[auth].availablePoints;
+                    tr.appendChild(tdPoints);
+                    let tdUname=document.createElement('td');
+                    tdUname.innerHTML=res[auth].username;
+                    tr.appendChild(tdUname);
+                    let tdFirstN = document.createElement('td');
+                    tdFirstN.innerHTML = res[auth].firstN;
+                    tr.appendChild(tdFirstN);
+                    let tdLastN = document.createElement('td');
+                    tdLastN.innerHTML = res[auth].lastN;
+                    tr.appendChild(tdLastN);
+                    let tdAge = document.createElement('td');
+                    tdAge.innerHTML = res[auth].age;
+                    tr.appendChild(tdAge);
+                    let tdEmail = document.createElement('td');
+                    tdEmail.innerHTML = res[auth].email;
+                    tr.appendChild(tdEmail);
+                    let tdPass = document.createElement('td');
+                    tdPass.innerHTML = res[auth].passwd;
+                    tr.appendChild(tdPass);
+                   
+
+                }
+
+                dataSection2.appendChild(authTable);
+            }
+        }
+    }
+}
+let dataSection3=document.getElementById('data3');
+function getData3() {
+    let url = 'http://localhost:8080/project1.2/allstors';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = receiveData;
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    function receiveData() {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status == 200) {
+                let res = xhttp.responseText;
+        
+                res = JSON.parse(res);
+      			console.log(res);
+                // Create table
+                let stoTable = document.createElement('table');
+                stoTable.id = 'StoryTable';
+                // Create header
+                let tHead = document.createElement('tr');
+                stoTable.appendChild(tHead);
+                let headers = ['story_Id','weight','story_type','status','title','completion date','genre','tag_line',
+                	              'description','phase','current editor','pitch date'];
+
+                for (let h of headers) {
+                    let th = document.createElement('th');
+                    th.innerHTML = h;
+                    tHead.appendChild(th);
+                }
+                // Iterate through stos
+                for (let sto in res) {
+                    let tr = document.createElement('tr');
+                    stoTable.appendChild(tr);
+                    let tdSto_id = document.createElement('td');
+                    tdSto_id.innerHTML = res[sto].story_id;
+                    tr.appendChild(tdSto_id);
+                    let tdWt = document.createElement('td');
+                    tdWt.innerHTML = res[sto].weight;
+                    tr.appendChild(tdWt);
+                    let tdStoTyp = document.createElement('td');
+                    tdStoTyp.innerHTML = res[sto].story_type;
+                    tr.appendChild(tdStoTyp);
+                    let tdStat = document.createElement('td');
+                    tdStat.innerHTML = res[sto].status;
+                    tr.appendChild(tdStat);
+                    let tdTitle = document.createElement('td');
+                    tdTitle.innerHTML = res[sto].title;
+                    tr.appendChild(tdTitle);
+                    let tdCDate = document.createElement('td');
+                    tdCDate.innerHTML = res[sto].completion_date;
+                    tr.appendChild(tdCDate);
+                    let tdGen = document.createElement('td');
+                    tdGen.innerHTML = res[sto].genre;
+                    tr.appendChild(tdGen);
+                    let tdTag = document.createElement('td');
+                    tdTag.innerHTML = res[sto].tag_line;
+                    tr.appendChild(tdTag);
+                    let tdDesc = document.createElement('td');
+                    tdDesc.innerHTML = res[sto].description;
+                    tr.appendChild(tdDesc);
+   
+                    let tdPhase = document.createElement('td');
+                    tdPhase.innerHTML = res[sto].currentApprovalPhase;
+                    tr.appendChild(tdPhase);
+                    let tdCurrEd = document.createElement('td');
+                    tdCurrEd.innerHTML = res[sto].current_ed;
+                    tr.appendChild(tdCurrEd);
+                    let tdPDate = document.createElement('td');
+                    tdPDate.innerHTML = res[sto].pitchDate;
+                    tr.appendChild(tdPDate);
+
+                }
+
+                dataSection3.appendChild(stoTable);
+                // for (let cat of res) {
+                    
+                // }
+            }
+        }
+    }
+}
+let dataSection4=document.getElementById('data4');
+function getData4() {
+    let url = 'http://localhost:8080/project1.2/allaps';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = receiveData;
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    function receiveData() {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status == 200) {
+                let res = xhttp.responseText;
+  
+                res = JSON.parse(res);
+     
+                // Create table
+                let APTable = document.createElement('table');
+                APTable.id = 'APTable';
+                // Create header
+                let tHead = document.createElement('tr');
+                APTable.appendChild(tHead);
+                let headers = ['approvalprocess_Id','editorList','story_id','author_id'];
+
+                for (let h of headers) {
+                    let th = document.createElement('th');
+                    th.innerHTML = h;
+                    tHead.appendChild(th);
+                }
+                // Iterate through aps
+                for (let ap in res) {
+                    let tr = document.createElement('tr');
+                    APTable.appendChild(tr);
+                    let tdAP_id = document.createElement('td');
+                    tdAP_id.innerHTML = res[ap].approval_id;
+                    tr.appendChild(tdAP_id);
+                    let tdEL = document.createElement('td');
+                    tdEL.innerHTML = res[ap].edList;
+                    tr.appendChild(tdEL);
+                    let tdStoId = document.createElement('td');
+                    tdStoId.innerHTML = res[ap].story_id;
+                    tr.appendChild(tdStoId);
+                    let tdAutId = document.createElement('td');
+                    tdAutId.innerHTML = res[ap].author_id;
+                    tr.appendChild(tdAutId);
+
+                }
+
+                dataSection4.appendChild(APTable);
+                // for (let cat of res) {
+                    
+                // }
+            }
+        }
+    }
+}
+
+let dataSection5=document.getElementById('data5');
+function getData5() {
+    let url = 'http://localhost:8080/project1.2/allsqs';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = receiveData;
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    function receiveData() {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status == 200) {
+                let res = xhttp.responseText;
+  
+                res = JSON.parse(res);
+  
+                // Create table
+                let SQTable = document.createElement('table');
+                SQTable.id = 'SQTable';
+                // Create header
+                let tHead = document.createElement('tr');
+                SQTable.appendChild(tHead);
+                let headers = ['StoryQ_Id','editor_id','passwd','storyqueue'];
+
+                for (let h of headers) {
+                    let th = document.createElement('th');
+                    th.innerHTML = h;
+                    tHead.appendChild(th);
+                }
+                // Iterate through aps
+                for (let sq in res) {
+                    let tr = document.createElement('tr');
+                    SQTable.appendChild(tr);
+                    let tdSQ_id = document.createElement('td');
+                    tdSQ_id.innerHTML = res[sq].sq_id;
+                    tr.appendChild(tdSQ_id);
+                    let tdEdId = document.createElement('td');
+                    tdEdId.innerHTML = res[sq].ed_id;
+                    tr.appendChild(tdEdId);
+                    let tdPass = document.createElement('td');
+                    tdPass.innerHTML = res[sq].passwd;
+                    tr.appendChild(tdPass);
+                    let tdSQ = document.createElement('td');
+                    tdSQ.innerHTML = res[sq].SQ;
+                    tr.appendChild(tdSQ);
+
+                }
+
+                dataSection5.appendChild(SQTable);
+                // for (let cat of res) {
+                    
+                // }
+            }
+        }
+    }
+}
+
+let dataSection6=document.getElementById('data6');
+function getData6() {
+    let url = 'http://localhost:8080/project1.2/allcomms';
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = receiveData;
+    xhttp.open('GET', url, true);
+    xhttp.send();
+    function receiveData() {
+        if (xhttp.readyState == 4) {
+            if (xhttp.status == 200) {
+                let res = xhttp.responseText;
+                console.log(res);
+                res = JSON.parse(res);
+                console.log(res);
+                // Create table
+                let ComTable = document.createElement('table');
+                ComTable.id = 'ComTable';
+                // Create header
+                let tHead = document.createElement('tr');
+                ComTable.appendChild(tHead);
+                let headers = ['Committee_Id','Committee Name','Genre','Senior Editor 1','Senior Editor 2','Member list'];
+
+                for (let h of headers) {
+                    let th = document.createElement('th');
+                    th.innerHTML = h;
+                    tHead.appendChild(th);
+                }
+                // Iterate through aps
+                for (let com in res) {
+                    let tr = document.createElement('tr');
+                    ComTable.appendChild(tr);
+                    let tdCom_id = document.createElement('td');
+                    tdCom_id.innerHTML = res[com].committee_id;
+                    tr.appendChild(tdCom_id);
+                    let tdComnm = document.createElement('td');
+                    tdComnm.innerHTML = res[com].comname;
+                    tr.appendChild(tdComnm);
+                    let tdGen = document.createElement('td');
+                    tdGen.innerHTML = res[com].genre;
+                    tr.appendChild(tdGen);
+                    let tdSE1 = document.createElement('td');
+                    tdSE1.innerHTML = res[com].se1editor_id;
+                    tr.appendChild(tdSE1);
+                    let tdSE2 = document.createElement('td');
+                    tdSE2.innerHTML = res[com].se2editor_id;
+                    tr.appendChild(tdSE2);
+                    let tdMems = document.createElement('td');
+                    tdMems.innerHTML = res[com].members;
+                    tr.appendChild(tdMems);
+
+                }
+
+                dataSection6.appendChild(ComTable);
+                // for (let cat of res) {
+                    
+                // }
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>

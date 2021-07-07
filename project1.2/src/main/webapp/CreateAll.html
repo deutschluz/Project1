@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create All!</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+ <script>
+ function pitchStory() {
+	   class Story{
+	 		constructor(title,tag_line,
+	 				story_type,status,pitchDate,genre,completion_date){
+	 			this.weight=0;
+	 			this.title=title;
+	 			this.tag_line=tag_line;
+	 			this.story_type=story_type;
+	 			this.story_id=0;
+	 			this.status="to be assigned";
+	 			this.pitchDate="01/01/21";
+	 			this.genre=genre;
+	 			this.currentApprovalPhase="AE";
+	 			this.completion_date=completion_date;
+	 			this.current_ed=1;
+	 			this.description="blahblah";
+	 		}
+	 	}
+	    let url = 'http://localhost:8080/project1.2/storyreg';
+
+	    // collect user input
+	    let story=new Story(document.getElementById('title').value,    		
+	    		          document.getElementById('tagline').value,
+	    		          document.getElementById('storyType').value,
+	                      document.getElementById('genre').value,
+	                      document.getElementById('completionDate').value)
+	    // AJAX Call
+	    let xhttp = new XMLHttpRequest();
+	    xhttp.onreadystatechange = sendStory;
+	    xhttp.open("POST", url, true);
+	    xhttp.setRequestHeader('Content-Type', 'application/json');
+	    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+	    xhttp.send(JSON.stringify(story));
+
+	    function sendStory() {
+	        if (xhttp.readyState == 4) {
+	            if (xhttp.status == 200) {
+	                console.log('success');
+	            }
+	        }
+	    }
+
+}
+ 
+ function registerEditor() {
+	 	class Editor{
+	 		constructor(username,first_name,last_name,email,passwd){
+	 			this.editor_id=0;
+	 			this.username=username;
+	 			this.first_name=first_name;
+	 			this.last_name=last_name;
+	 			this.email=email;
+	 			this.passwd=passwd;
+	 			this.rank="AE";
+	 		}
+	 	}
+	    let url = 'http://localhost:8080/project1.2/editreg';
+
+	    // create editor object from  user input
+	    let editor =new Editor(document.getElementById('username').value,
+	    				document.getElementById('firstN').value,
+	    				document.getElementById('lastN').value,
+	    				document.getElementById('email').value,
+						document.getElementById('passwd').value)
+	   
+
+	    // AJAX Call
+	    let xhttp = new XMLHttpRequest();
+	    xhttp.onreadystatechange = sendEditor;
+	    xhttp.open("POST", url, true);
+	    xhttp.setRequestHeader('Content-Type', 'application/json');
+	    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+	    xhttp.send(JSON.stringify(editor));
+
+	    function sendEditor() {
+	        if (xhttp.readyState == 4) {
+	            if (xhttp.status == 200) {
+	                console.log('success');
+	            }
+	        }
+	    }
+
+}		
+ 
+	 function registerAuthor() {
+		 	class Author{
+		 		constructor(cusername,cfirstN,clastN,cage,cemail,cpasswd){
+		 			this.author_id=0;
+		 			this.availablepoints=100;
+		 			this.username=cusername;
+		 			this.firstN=cfirstN;
+		 			this.lastN=clastN;
+		 			this.age=cage;
+		 			this.email=cemail;
+		 			this.passwd=cpasswd;
+		 		}
+		 	}
+		 
+		    let url = 'http://localhost:8080/project1.2/authreg';
+
+		    // create author object using input data.
+		    author=new Author(document.getElementById('username').value,
+		                        document.getElementById('firstN').value,
+		                        document.getElementById('lastN').value,
+		                        document.getElementById('age').value,
+		                        document.getElementById('email').value,
+			                    document.getElementById('passwd').value)
+
+		
+
+		    // AJAX Call
+		    let xhttp = new XMLHttpRequest();
+		    xhttp.onreadystatechange = sendAuthor;
+		    xhttp.open("POST", url, true);
+		    xhttp.setRequestHeader('Content-Type', 'application/json');
+		    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+		    xhttp.send(JSON.stringify(author));
+
+		    function sendAuthor() {
+		        if (xhttp.readyState == 4) {
+		            if (xhttp.status == 200) {
+		                console.log('success');
+		            }
+		        }
+		    }
+
+	 }
+	 
+	 </script>
+</head>
+<body>
+	 <p> Enter the following details</p>
+ <br>
+    <div id='editInfo' class='container'>
+        <form>
+            <div class="form-control">
+           	<label for='username'>User Name:</label>
+            <input id='username' type='text' placeholder="your user name">
+           	
+           	
+            <br>
+            <label for='firstN'>First Name:</label>
+            <input id='firstN' type='text' placeholder="your name">
+            
+            <br>
+            <label for='lastN'>Last Name:</label>
+            <input id='lastN' type='text' placeholder="your last name">
+            <br>
+            <label for='email'>Email:</label>
+            <input id='email' type='text' placeholder="your email">
+            <br>
+            
+            <label for='passwd'>Password:</label>
+            <input id='passwd' type='text' placeholder="its a secret! shhh!">
+            <br>
+            
+             <label for='age'>Age:</label>
+            <input id='age' type='number' placeholder='0'>
+            <br>
+            <button id='addCustomer' type='button' onclick='registerEditor()'>Register Editor</button>
+            </div>
+        </form>
+    </div>
+ <br>
+    <div id='authInfo' class='container'>
+        <form>
+            <div class="form-control">
+            
+             <label for='username'>User Name:</label>
+            <input id='username' type='text' placeholder="your user name">
+            
+            <br>
+            <label for='firstN'>First Name:</label>
+            <input id='firstN' type='text' placeholder="your first name">
+            
+            <br>
+            <label for='lastN'>Last Name:</label>
+            <input id='lastN' type='text' placeholder="your last name">
+            <br>
+            <label for='email'>Email:</label>
+            <input id='email' type='text' placeholder="your email">
+            <br>
+            
+            <label for='passwd'>Password:</label>
+            <input id='passwd' type='text' placeholder="its a secret! shhh!">
+            <br>
+            
+             <label for='age'>Age:</label>
+            <input id='age' type='number' placeholder='0'>
+            <br>
+            <button id='addCustomer' type='button' onclick='registerAuthor()'>Register Author</button>
+            </div>
+        </form>
+    </div>
+     <br>
+    <div id='storInfo' class='container'>
+        <form>
+            <div class="form-control">
+            
+             <label for='title'>Title:</label>
+            <input id='title' type='text' placeholder="your book title here">
+            
+            <br>
+            <label for='genre'>Genre:</label>
+            <input id='genre' type='text' placeholder="fantasy">
+            
+            <br>
+            <label for='tagline'>Tag Line:</label>
+            <input id='tagline' type='text' placeholder="blah blah">
+            <br>
+            <label for='completionDate'>Completion Date:</label>
+            <input id='completionDate' type='text' placeholder="the expected completion date">
+            <br>
+            
+            <label for='storyType'>Story Type:</label>
+            <input id='storyType' type='text' placeholder="novel or something">
+            <br>
+            
+       
+            <button id='newStory' type='button' onclick='pitchStory()'>Pitch a New Story</button>
+            </div>
+        </form>
+    </div>
+    
+</body>
+<!-- Bootstrap Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</html>

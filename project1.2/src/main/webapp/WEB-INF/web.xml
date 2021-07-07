@@ -1,0 +1,144 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <servlet>
+        <servlet-name>AuthorReg</servlet-name>
+        <servlet-class>
+            servlets.AuthorReg
+        </servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AuthorReg</servlet-name>
+        <url-pattern>/authreg</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>EditorReg</servlet-name>
+        <servlet-class>
+            servlets.EditorReg
+        </servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EditorReg</servlet-name>
+        <url-pattern>/editreg</url-pattern>
+    </servlet-mapping>
+    <servlet>
+    <servlet-name>AuthorLoginServ</servlet-name>
+        <servlet-class>
+            servlets.AuthorLoginServ
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthorLoginServ</servlet-name>
+        <url-pattern>/authlog</url-pattern>
+    </servlet-mapping>
+
+    
+     <servlet>
+    <servlet-name>EditorLoginServ</servlet-name>
+        <servlet-class>
+            servlets.EditorLoginServ
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditorLoginServ</servlet-name>
+        <url-pattern>/editlog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+     <servlet-name>StoryServ</servlet-name>
+        <servlet-class>
+            servlets.StoryServ
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoryServ</servlet-name>
+        <url-pattern>/storyreg</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+     <servlet-name>ViewAllEditors</servlet-name>
+        <servlet-class>
+            servlets.ViewAllEditors
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllEditors</servlet-name>
+        <url-pattern>/alleds</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+     <servlet-name>ViewAllAuthors</servlet-name>
+        <servlet-class>
+            servlets.ViewAllAuthors
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllAuthors</servlet-name>
+        <url-pattern>/allauths</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+     <servlet-name>ViewAllStories</servlet-name>
+        <servlet-class>
+            servlets.ViewAllStories
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllStories</servlet-name>
+        <url-pattern>/allstors</url-pattern>
+    </servlet-mapping>
+    
+    
+    <servlet>
+     <servlet-name>ViewAllAPs</servlet-name>
+        <servlet-class>
+            servlets.ViewAllAPs
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllAPs</servlet-name>
+        <url-pattern>/allaps</url-pattern>
+    </servlet-mapping>
+    
+      
+    <servlet>
+     <servlet-name>ViewAllSQs</servlet-name>
+        <servlet-class>
+            servlets.ViewAllSQs
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllSQs</servlet-name>
+        <url-pattern>/allsqs</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+     <servlet-name>ViewAllComms</servlet-name>
+        <servlet-class>
+            servlets.ViewAllComms
+        </servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllComms</servlet-name>
+        <url-pattern>/allcomms</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+		<welcome-file>Welcome.html</welcome-file>
+		<welcome-file>AuthorLogin.html</welcome-file>
+        <welcome-file>EditorLogin.html</welcome-file>
+        <welcome-file>AuthorMain.html</welcome-file>
+        <welcome-file>EditorMain.html</welcome-file>
+        <welcome-file>AuthorReg.html</welcome-file>
+        <welcome-file>EditorReg.html</welcome-file>
+        <welcome-file>NewStory.html</welcome-file>
+        <welcome-file>ViewAll.html</welcome-file>
+    </welcome-file-list>
+    
+</web-app>
